@@ -196,7 +196,7 @@ With `--json` the preview is one object on stdout:
 A dry run may make read calls (resolving a user group, reading its members,
 loading a draft, finding a scheduled message, naming the target) but no write call. A failure is the real
 command's failure: invalid input, a missing file, bad Block Kit JSON, an
-unknown group, a draft or saved write on an app token or a scheduled-message command
+unknown group, a draft or `saved` write command on an app token or a scheduled-message command
 on a browser session exits `1` with the same error. **Slack checks permissions only on the real write**, so a dry run can
 pass where the write is then refused (`missing_scope`, `not_in_channel`, …).
 
