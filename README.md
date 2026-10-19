@@ -162,7 +162,7 @@ slackcli messages send --permalink="$LINK" --message="On it 👀"
 | Send, reply, edit, delete, react, or unreact | `slackcli messages send --permalink="$LINK" --message="…"` | [messages](docs/user-guide/messages.md) |
 | Search the workspace | `slackcli search messages "release notes"` | [search](docs/user-guide/search.md) |
 | Find a channel or a person | `slackcli search people "ada"` | [search](docs/user-guide/search.md) |
-| Work through "saved for later" | `slackcli saved list --state=to_do` | [saved items](docs/user-guide/saved.md) |
+| Work through "saved for later" | `slackcli saved list --state=to_do`, `saved complete --permalink="$LINK"` | [saved items](docs/user-guide/saved.md) |
 | Read a Canvas as Markdown | `slackcli canvas read F123` | [canvas](docs/user-guide/canvas.md) |
 | Inspect or download a Slack file | `slackcli files info F123` | [files](docs/user-guide/files.md) |
 | Upload a file with a message | `slackcli messages send --file=./report.pdf …` | [messages](docs/user-guide/messages.md) |
@@ -366,6 +366,8 @@ slackcli search people "ada@example.com"
 
 ```bash
 slackcli saved list --state=to_do            # saved | to_do | completed
+slackcli saved add --permalink="$LINK" --due "2026-10-12 09:50"   # browser auth
+slackcli saved complete --permalink="$LINK"
 slackcli canvas list --channel=C1234567890
 slackcli canvas read F1234567890             # Canvas -> Markdown
 slackcli canvas sections F1234567890 --type h2   # section IDs (app token)
