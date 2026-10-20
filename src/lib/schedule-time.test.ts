@@ -337,4 +337,11 @@ describe('parseDueTime', () => {
     );
     expect(refusal(() => parseDueTime('2026-02-30 09:50'))).toStartWith('--due "2026-02-30 09:50" is not');
   });
+
+  it('refuses a due date at or before the epoch, which Slack reads as no due date', () => {
+    expect(refusal(() => parseDueTime('0'))).toBe('--due must be after 1970-01-01T00:00:00Z; got "0".');
+    expect(refusal(() => parseDueTime('1970-01-01T00:00:00Z'))).toContain('--due must be after');
+    expect(refusal(() => parseDueTime('1969-12-31T23:00:00Z'))).toContain('--due must be after');
+    expect(parseDueTime('1')).toBe(1);
+  });
 });

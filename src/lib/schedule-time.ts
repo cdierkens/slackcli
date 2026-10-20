@@ -91,10 +91,15 @@ export function parseScheduleTime(input: ScheduleTimeInput, nowMs: number = Date
 /**
  * The due date of a Later-list item (`saved add|update --due`), in Unix
  * seconds. Takes the `--at` formats; the future check and the 120-day cap are
- * chat.scheduleMessage rules, so neither applies.
+ * chat.scheduleMessage rules, so neither applies. A due date at or before the
+ * epoch is refused: `date_due: 0` is a to-do with no due date.
  */
 export function parseDueTime(raw: string): number {
-  return parseAt(raw, '--due');
+  const due = parseAt(raw, '--due');
+  if (due <= 0) {
+    throw new InvalidInputError(`--due must be after 1970-01-01T00:00:00Z; got "${raw}".`);
+  }
+  return due;
 }
 
 // `flag` names the option in the error messages.
